@@ -24,7 +24,7 @@ const SearchbarComponent = () => {
 
 const styles = StyleSheet.create({
     container:{
-        padding:15
+        padding:16
     }
 })
 

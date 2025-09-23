@@ -1,36 +1,28 @@
-import { Tabs } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
+import { Stack } from 'expo-router';
+import { ThemeProvider } from 'styled-components';
+import { theme } from '../infrastructure/theme';
+import { Lato_400Regular, useFonts as useLato } from '@expo-google-fonts/lato';
+import { Oswald_400Regular, useFonts as useOswald } from '@expo-google-fonts/oswald';
+import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 
-export default function Layout() {
+export default function RootLayout() {
+   const [oswaldLoaded] = useOswald({
+    Oswald_400Regular
+  });
+  const [latoLoaded] = useLato({
+    Lato_400Regular
+  });
+
+  if (!oswaldLoaded || !latoLoaded) {
+    return null;
+  }
+
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: "tomato" }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} />
-          ),
-        }}
-      />
-      {/* <Tabs.Screen
-        name="settings"
-        options={{
-          title: "Settings",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="settings" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: "Profile",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person" size={size} color={color} />
-          ),
-        }}
-      /> */}
-    </Tabs>
+     <ThemeProvider theme={theme}>     
+        <Stack  screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }}  />
+        </Stack>
+        <ExpoStatusBar style="auto" key={"sts"} />
+    </ThemeProvider>
   );
 }

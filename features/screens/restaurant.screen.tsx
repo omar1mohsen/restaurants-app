@@ -4,20 +4,15 @@ import { FlatList, Platform, StatusBar, View } from "react-native";
 import  RestaurantCard  from "../components/RestaurantCard";
 import styled from "styled-components";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Wrapper } from "../components/layout";
 
 const RestaurantScreen = () => {
-  const inAndroid = Platform.OS === "android";
 
     const RestaurantsContainer = styled(FlatList).attrs({
       contentContainerStyle:{
         padding:16
       }
     })``
-
-    const Wrapper = styled(SafeAreaView)`
-      flex: 1;
-      margin-top: ${inAndroid ? `${StatusBar.currentHeight}px` :"0px"};
-    `
 
     const data = [
       {name:"Restaurant 1"},
