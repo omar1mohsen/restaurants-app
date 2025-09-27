@@ -1,12 +1,15 @@
 import SearchbarComponent from "@/components/sharedComponents/Searchbar";
-import React from "react";
-import { FlatList, Platform, StatusBar, View } from "react-native";
+import React, { useContext } from "react";
+import { FlatList,View } from "react-native";
 import  RestaurantCard  from "../components/RestaurantCard";
 import styled from "styled-components";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Wrapper } from "../components/layout";
+import { RestaurantsContext } from "@/services/resturants/restaurants.context";
+import { ActivityIndicator } from "react-native-paper";
+import colors from "@/infrastructure/theme/colors";
 
 const RestaurantScreen = () => {
+  const {restaurants,isLoading,error} = useContext(RestaurantsContext);
 
     const RestaurantsContainer = styled(FlatList).attrs({
       contentContainerStyle:{
@@ -14,25 +17,21 @@ const RestaurantScreen = () => {
       }
     })``
 
-    const data = [
-      {name:"Restaurant 1"},
-      {name:"Restaurant 2"},
-      {name:"Restaurant 3"},
-      {name:"Restaurant 4"},
-      {name:"Restaurant 5"},
-      {name:"Restaurant 6"},
-      {name:"Restaurant 7"},
-      {name:"Restaurant 8"},
-      {name:"Restaurant 9"},
-      {name:"Restaurant 10"},
-    ]
+    if(isLoading){
+      return(
+        <View style={{flex:1,justifyContent:"center",alignItems:"center"}}>
+            <ActivityIndicator size={50} animating={true} color={colors.brand.secondary} />
+        </View>
+      )
+    }
+
 
   return (
     <Wrapper>
       <SearchbarComponent />
       <RestaurantsContainer
-        data={data}
-        renderItem={({item})=><RestaurantCard/>}
+        data={restaurants}
+        renderItem={({item})=><RestaurantCard restaurant={item}/>}
         keyExtractor={(item:any)=>item.name}
       />
         

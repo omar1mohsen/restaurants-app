@@ -3,7 +3,6 @@ import { Card } from 'react-native-paper';
 import styled from "styled-components/native";
 import StarIcon from "@/assets/icons/star.svg"
 
-
 interface Restaurant {
   name?: string;
   icon?: string;
@@ -15,7 +14,7 @@ interface Restaurant {
 }
 
 interface Props {
-  restaurant?: Restaurant;
+  restaurant: Restaurant | any;
 }
 
 const Title = styled.Text`
@@ -51,18 +50,18 @@ const RestaurantCard: React.FC<Props> = ({restaurant = {}}) => {
 
 
   return(
-     <Card elevation={5} style={{marginBottom:16}}>
-      <Card.Cover source={{ uri: photos[0] }} />
-      <Card.Content style={{padding:10 }}>
-        <Title>{name}</Title>
-        <RatingWrapper>
-          {[...Array(Math.floor(4))].map((item,index)=>(
-            <StarIcon width={20} height={20} fill="gold" key={index} />
-          ))}
-        </RatingWrapper>
-        <Address>{address}</Address>
-      </Card.Content>
-    </Card>
+      <Card elevation={5} style={{marginBottom:16}}>
+        <Card.Cover source={{ uri: photos[0] }} />
+        <Card.Content style={{padding:10 }}>
+          <Title>{name}</Title>
+          <RatingWrapper>
+            {[...Array(Math.floor(4))].map((item,index)=>(
+              <StarIcon width={20} height={20} fill="gold" key={index} />
+            ))}
+          </RatingWrapper>
+          <Address>{address}</Address>
+        </Card.Content>
+      </Card>
   );
 };
 
