@@ -1,12 +1,12 @@
 import SearchbarComponent from "@/components/sharedComponents/Searchbar";
+import colors from "@/infrastructure/theme/colors";
+import { RestaurantsContext } from "@/services/resturants/restaurants.context";
 import React, { useContext } from "react";
-import { FlatList,View } from "react-native";
-import  RestaurantCard  from "../components/RestaurantCard";
+import { FlatList, View } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
 import styled from "styled-components";
 import { Wrapper } from "../components/layout";
-import { RestaurantsContext } from "@/services/resturants/restaurants.context";
-import { ActivityIndicator } from "react-native-paper";
-import colors from "@/infrastructure/theme/colors";
+import RestaurantCard from "../components/restaurants/RestaurantCard";
 
 const RestaurantScreen = () => {
   const {restaurants,isLoading,error} = useContext(RestaurantsContext);

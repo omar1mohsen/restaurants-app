@@ -1,7 +1,10 @@
 import React from "react";
 import { Card } from 'react-native-paper';
-import styled from "styled-components/native";
 import StarIcon from "@/assets/icons/star.svg"
+import { Text, View } from "react-native";
+import colors from "@/infrastructure/theme/colors";
+import { Ionicons } from "@expo/vector-icons";
+import { Address, CloseWrapper, RatingWrapper, Title } from "@/assets/styles/resturant-info";
 
 interface Restaurant {
   name?: string;
@@ -16,24 +19,6 @@ interface Restaurant {
 interface Props {
   restaurant: Restaurant | any;
 }
-
-const Title = styled.Text`
-  font-family: ${(props:any)=>props.theme.fonts.heading};
-  font-size: ${(props:any)=>props.theme.fontSizes.title};
-  margin-bottom: ${(props:any)=>props.theme.space[2]}
-`;
-const Address = styled.Text`
-  font-family: ${(props:any)=>props.theme.fonts.body};
-  font-weight:700;
-  font-size: ${(props:any)=>props.theme.fontSizes.caption};
-  margin: ${(props:any)=>props.theme.space[2]} 0;
-
-`;
-
-const RatingWrapper = styled.View`
-  flex-direction:row;
-  gap:4px;
-`
 
 const RestaurantCard: React.FC<Props> = ({restaurant = {}}) => {
   const {
@@ -56,8 +41,14 @@ const RestaurantCard: React.FC<Props> = ({restaurant = {}}) => {
           <Title>{name}</Title>
           <RatingWrapper>
             {[...Array(Math.floor(4))].map((item,index)=>(
-              <StarIcon width={20} height={20} fill="gold" key={index} />
+              <StarIcon width={20} height={20} fill="gold" key={`star_${index}`} />
             ))}
+            {isClosedTemporarily && (
+              <CloseWrapper >
+                <Ionicons name="warning" size={20} color={colors.ui.error} />
+                <Text style={{color:colors.ui.error,fontWeight:700}}>CLOSED TEMPORARILY</Text>
+              </CloseWrapper>
+            )}
           </RatingWrapper>
           <Address>{address}</Address>
         </Card.Content>

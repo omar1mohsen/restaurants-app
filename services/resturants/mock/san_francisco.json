@@ -3,7 +3,7 @@
   "next_page_token": "some token",
   "results": [
     {
-      "business_status": "OPERATIONAL",
+      "business_status": "CLOSED_TEMPORARILY",
       "geometry": {
         "location": {
           "lat": 37.77361,

@@ -1,10 +1,12 @@
+import { LocationContext } from '@/services/location/location.context';
 import { AntDesign } from '@expo/vector-icons';
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Searchbar } from 'react-native-paper';
 
 const SearchbarComponent = () => {
-    const [searchQuery, setSearchQuery] = React.useState('');
+    const {keyword,search} = useContext(LocationContext)
+    const [searchQuery, setSearchQuery] = React.useState(keyword);
 
     return (
         <View style={styles.container}>
@@ -17,6 +19,7 @@ const SearchbarComponent = () => {
                     // borderRadius:0,
                     boxShadow:"0 0 8px 0 #0006"
                 }}
+                onEndEditing={()=> search(searchQuery)}
             />
         </View>
     );

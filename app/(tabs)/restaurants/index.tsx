@@ -1,5 +1,5 @@
+import RestaurantScreen from '@/screens/restaurant.screen'
 import React from 'react'
-import RestaurantScreen from '@/features/screens/restaurant.screen'
 
 const index = () => {
   return <RestaurantScreen/>
