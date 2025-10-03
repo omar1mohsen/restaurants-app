@@ -2,14 +2,16 @@ import SearchbarComponent from "@/components/sharedComponents/Searchbar";
 import colors from "@/infrastructure/theme/colors";
 import { RestaurantsContext } from "@/services/resturants/restaurants.context";
 import React, { useContext } from "react";
-import { FlatList, View } from "react-native";
+import { FlatList, TouchableOpacity, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import styled from "styled-components";
 import { Wrapper } from "../components/layout";
 import RestaurantCard from "../components/restaurants/RestaurantCard";
+import { router } from "expo-router";
 
 const RestaurantScreen = () => {
   const {restaurants,isLoading,error} = useContext(RestaurantsContext);
+  console.log("🚀 ~ RestaurantScreen ~ restaurants:", restaurants)
 
     const RestaurantsContainer = styled(FlatList).attrs({
       contentContainerStyle:{
@@ -31,7 +33,18 @@ const RestaurantScreen = () => {
       <SearchbarComponent />
       <RestaurantsContainer
         data={restaurants}
-        renderItem={({item})=><RestaurantCard restaurant={item}/>}
+        renderItem={({item}:any)=>(
+          <TouchableOpacity
+            onPress={()=>{
+              router.push({
+                pathname: "/(tabs)/restaurants/[id]",
+                params: { id: item.name },
+              })
+            }}  
+          >
+            <RestaurantCard restaurant={item}/>
+          </TouchableOpacity>
+      )}
         keyExtractor={(item:any)=>item.name}
       />
         

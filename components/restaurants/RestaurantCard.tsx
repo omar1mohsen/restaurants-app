@@ -5,6 +5,7 @@ import { Text, View } from "react-native";
 import colors from "@/infrastructure/theme/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { Address, CloseWrapper, RatingWrapper, Title } from "@/assets/styles/resturant-info";
+import { router } from "expo-router";
 
 interface Restaurant {
   name?: string;
@@ -35,7 +36,7 @@ const RestaurantCard: React.FC<Props> = ({restaurant = {}}) => {
 
 
   return(
-      <Card elevation={5} style={{marginBottom:16}}>
+      <Card elevation={5} style={{ marginBottom: 16 }}>
         <Card.Cover source={{ uri: photos[0] }} />
         <Card.Content style={{padding:10 }}>
           <Title>{name}</Title>

@@ -1,6 +1,7 @@
 // app/(tabs)/_layout.tsx
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { TransitionPresets } from "@react-navigation/bottom-tabs";
 
 export default function TabsLayout() {
   return (
@@ -9,10 +10,12 @@ export default function TabsLayout() {
         headerShown: false,
         tabBarActiveTintColor: "tomato",
         tabBarInactiveTintColor: "gray",
+        animation:"shift",
+
       }}
     >
       <Tabs.Screen
-        name="restaurants/index"
+        name="restaurants"
         options={{
           title: "Restaurants",
           tabBarLabel: "Restaurants",
@@ -51,6 +54,12 @@ export default function TabsLayout() {
           ),
         }}
       />
+      {/* <Tabs.Screen
+        name="restaurants/[id]"
+        options={{
+          href:null,
+        }}
+      /> */}
     </Tabs>
   );
 }
