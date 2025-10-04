@@ -7,7 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Address, CloseWrapper, RatingWrapper, Title } from "@/assets/styles/resturant-info";
 import { router } from "expo-router";
 
-interface Restaurant {
+export interface Restaurant {
   name?: string;
   icon?: string;
   photos?: string[];

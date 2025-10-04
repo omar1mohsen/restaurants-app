@@ -1,21 +1,31 @@
 import { LocationContext } from "@/services/location/location.context";
 import { AntDesign } from "@expo/vector-icons";
 import React, { useContext, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { Searchbar } from "react-native-paper";
+import styled from "styled-components/native";
+
+const SearchBarWrapper = styled(View)`
+  padding: 16px;
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  z-index:10;
+`;
 
 const SearchbarComponent = () => {
   const { keyword, search } = useContext(LocationContext);
   const [searchQuery, setSearchQuery] = React.useState(keyword);
 
-  useEffect(() => {
-    setSearchQuery(keyword);
-  }, [keyword]);
+  useEffect(()=>{
+    setSearchQuery(keyword)
+  },[keyword])
 
   return (
-    <View style={styles.container}>
+    <SearchBarWrapper>
       <Searchbar
         placeholder="Search"
+        icon={"map"}
         onChangeText={setSearchQuery}
         value={searchQuery}
         clearIcon={() => <AntDesign name="close" size={24} color="black" />}
@@ -25,14 +35,8 @@ const SearchbarComponent = () => {
         }}
         onEndEditing={() => search(searchQuery)}
       />
-    </View>
+    </SearchBarWrapper>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-  },
-});
 
 export default SearchbarComponent;
